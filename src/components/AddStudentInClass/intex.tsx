@@ -56,7 +56,9 @@ export function AddStudentInClass({ id }: ClassProps) {
 
 	async function getStudentData() {
 		try {
-			const response = await fetch("http://localhost:3333/students");
+			const response = await fetch(
+				`${process.env.NEXT_PUBLIC_API_URL}/students`,
+			);
 			if (!response.ok) {
 				console.error("Erro ao buscar alunos");
 				return;
@@ -75,11 +77,14 @@ export function AddStudentInClass({ id }: ClassProps) {
 	}
 
 	async function addStudentInClass({ classId, studentId }: ClassUser) {
-		const response = await fetch("http://localhost:3333/class/enrollments", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ classId, studentId }),
-		});
+		const response = await fetch(
+			`${process.env.NEXT_PUBLIC_API_URL}/class/enrollments`,
+			{
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ classId, studentId }),
+			},
+		);
 
 		if (!response.ok) {
 			console.error(await response.json());

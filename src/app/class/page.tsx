@@ -27,9 +27,8 @@ export interface Student {
 }
 
 async function getData(): Promise<Class[]> {
-	const response = await fetch("http://localhost:3333/class");
+	const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/class`);
 	const data: Root = await response.json();
-	console.log(data);
 	const classData = data.map((test) => {
 		return {
 			name: test.name,

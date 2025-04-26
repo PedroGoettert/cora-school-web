@@ -52,7 +52,9 @@ export function InfoClass({ id }: ClassProps) {
 
 	async function getClassData() {
 		try {
-			const response = await fetch(`http://localhost:3333/class/${id}`);
+			const response = await fetch(
+				`${process.env.NEXT_PUBLIC_API_URL}/class/${id}`,
+			);
 			if (!response.ok) {
 				console.error("Erro ao buscar alunos");
 				return;
@@ -68,11 +70,14 @@ export function InfoClass({ id }: ClassProps) {
 	}
 
 	async function handleDeleteUserFromClass(classId: string, studentId: string) {
-		const response = await fetch("http://localhost:3333/class/student", {
-			method: "DELETE",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ classId, studentId }),
-		});
+		const response = await fetch(
+			`${process.env.NEXT_PUBLIC_API_URL}/class/student`,
+			{
+				method: "DELETE",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ classId, studentId }),
+			},
+		);
 		if (!response.ok) {
 			console.error("Erro ao deletar aluno");
 			return;
