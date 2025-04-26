@@ -13,7 +13,7 @@ export function Header() {
 		{ name: "Dashboard", href: "/" },
 		{ name: "Turmas", href: "/class" },
 		{ name: "Alunos", href: "/students" },
-		{ name: "Configurações", href: "/settings" },
+		// { name: "Configurações", href: "/settings" },
 	];
 
 	return (

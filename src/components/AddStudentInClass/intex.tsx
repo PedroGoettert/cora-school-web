@@ -77,21 +77,25 @@ export function AddStudentInClass({ id }: ClassProps) {
 	}
 
 	async function addStudentInClass({ classId, studentId }: ClassUser) {
-		const response = await fetch(
-			`${process.env.NEXT_PUBLIC_API_URL}/class/enrollments`,
-			{
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ classId, studentId }),
-			},
-		);
+		try {
+			const response = await fetch(
+				`${process.env.NEXT_PUBLIC_API_URL}/class/enrollments`,
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ classId, studentId }),
+				},
+			);
 
-		if (!response.ok) {
-			console.error(await response.json());
-			return;
+			if (!response.ok) {
+				console.error(await response.json());
+				return;
+			}
+
+			router.refresh();
+		} catch (err) {
+			throw new Error("erro");
 		}
-
-		router.refresh();
 	}
 
 	return (

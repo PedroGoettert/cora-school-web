@@ -66,26 +66,31 @@ export function InfoClass({ id }: ClassProps) {
 			setStudentsData(student);
 		} catch (err) {
 			console.error("Erro na requisição:", err);
+			return [];
 		}
 	}
 
 	async function handleDeleteUserFromClass(classId: string, studentId: string) {
-		const response = await fetch(
-			`${process.env.NEXT_PUBLIC_API_URL}/class/student`,
-			{
-				method: "DELETE",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ classId, studentId }),
-			},
-		);
-		if (!response.ok) {
-			console.error("Erro ao deletar aluno");
-			return;
+		try {
+			const response = await fetch(
+				`${process.env.NEXT_PUBLIC_API_URL}/class/student`,
+				{
+					method: "DELETE",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ classId, studentId }),
+				},
+			);
+			if (!response.ok) {
+				console.error("Erro ao deletar aluno");
+				return;
+			}
+			setStudentsData((prev) =>
+				prev?.filter((student) => student.id !== studentId),
+			);
+			router.refresh();
+		} catch (err) {
+			return "Aluno não encontrado";
 		}
-		setStudentsData((prev) =>
-			prev?.filter((student) => student.id !== studentId),
-		);
-		router.refresh();
 	}
 
 	return (

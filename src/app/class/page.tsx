@@ -27,18 +27,37 @@ export interface Student {
 }
 
 async function getData(): Promise<Class[]> {
-	const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/class`);
-	const data: Root = await response.json();
-	const classData = data.map((test) => {
-		return {
+	try {
+		const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/class`, {
+			cache: "no-store",
+		});
+
+		if (!response.ok) {
+			console.error("Failed to fetch class data", response.statusText);
+			return []; // se falhar, retorna array vazio
+		}
+
+		const data = await response.json();
+
+		// Garante que é array antes de mapear
+		if (!Array.isArray(data)) {
+			console.error("Data fetched is not an array:", data);
+			return [];
+		}
+
+		const classData = data.map((test) => ({
 			name: test.name,
 			id: test.id,
 			amout: test.classUser.length,
 			hour: test.hour,
 			maxStudent: test.maxStudent,
-		};
-	});
-	return classData;
+		}));
+
+		return classData;
+	} catch (error) {
+		console.error("Error fetching class data:", error);
+		return [];
+	}
 }
 
 export default async function ClassPage() {
