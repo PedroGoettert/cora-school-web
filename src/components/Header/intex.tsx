@@ -17,7 +17,7 @@ export function Header() {
 	];
 
 	return (
-		<header className="w-full border-b bg-white shadow-sm">
+		<header className="w-full border-b bg-white shadow-sm flex justify-center">
 			<div className="container flex h-16 items-center justify-between">
 				<Link href="/" className="flex items-center gap-2">
 					<School className="h-6 w-6 text-blue-600" />
