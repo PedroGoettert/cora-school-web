@@ -49,14 +49,6 @@ export default function Login() {
 		router.push("/");
 	}
 
-	// async function getData() {
-	// 	// Simulando uma requisição async (tipo login na API)
-	// 	console.log("entrou na requisição");
-	// 	await new Promise((resolve) => setTimeout(resolve, 1000)); // Espera 1 segundo
-	// 	console.log("saiu da requisição");
-	// 	document.cookie = "token=teste";
-	// }
-
 	return (
 		<div className="min-h-screen flex justify-center items-center px-4 bg-[#6B5B95]">
 			<Card className="w-[100%] max-w-[500px] flex justify-center">
@@ -70,8 +62,11 @@ export default function Login() {
 						/>
 					</CardDescription>
 
-					<CardContent className="w-[100%] max-w-[400px] flex flex-col gap-5">
-						<form onSubmit={handleSubmit(handleLogin)}>
+					<CardContent className="w-[100%] max-w-[400px]">
+						<form
+							className="flex flex-col gap-5"
+							onSubmit={handleSubmit(handleLogin)}
+						>
 							<div className="flex flex-col gap-2">
 								<Label htmlFor="usuario">Usuário</Label>
 								<Input
