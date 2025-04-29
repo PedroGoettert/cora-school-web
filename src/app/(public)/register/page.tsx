@@ -69,12 +69,14 @@ export default function Register() {
 		<div className="min-h-screen flex justify-center items-center px-4 bg-[#6B5B95]">
 			<Card className="w-[100%] max-w-[500px] flex justify-center">
 				<CardHeader className="flex flex-col items-center">
-					<CardTitle className="font-bold text-[18px]">Cadastro</CardTitle>
+					<CardTitle className="font-bold text-[18px] mb-[-30px] z-10">
+						Cadastro
+					</CardTitle>
 					<CardDescription>
 						<Image
 							src={logoCora}
 							alt="Logo Cora Educação"
-							className="w-20 h-2w-20 object-contain p-1"
+							className="w-32 h-2w-32 object-contain p-1"
 						/>
 					</CardDescription>
 

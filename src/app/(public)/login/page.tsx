@@ -19,6 +19,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import Link from "next/link";
 
 export default function Login() {
 	const router = useRouter();
@@ -53,7 +54,6 @@ export default function Login() {
 		<div className="min-h-screen flex justify-center items-center px-4 bg-[#6B5B95]">
 			<Card className="w-[100%] max-w-[500px] flex justify-center">
 				<CardHeader className="flex flex-col items-center">
-					<CardTitle className="font-bold text-2xl">Login</CardTitle>
 					<CardDescription>
 						<Image
 							src={logoCora}
@@ -102,10 +102,22 @@ export default function Login() {
 								</div>
 							</div>
 
-							<div className="flex gap-4 mt-4">
-								<Button className="flex-1" type="submit">
+							<div className="flex flex-col items-center gap-4 mt-4">
+								<Button
+									className="flex-1 w-[100%] py-[10px] bg-purple-700 hover:bg-purple-800 font-bold text-white"
+									type="submit"
+								>
 									Entrar
 								</Button>
+
+								<Link href={"/register"}>
+									<Button
+										className="border text-black font-bold w-[100px]"
+										variant="secondary"
+									>
+										Criar Conta
+									</Button>
+								</Link>
 							</div>
 						</form>
 					</CardContent>
