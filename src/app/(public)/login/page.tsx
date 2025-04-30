@@ -62,7 +62,7 @@ export default function Login() {
 			}
 
 			const data = await response.json();
-			document.cookie = `token=${data.token}; expires=${new Date(Date.now() + 60 * 1000).toUTCString()}; path=/; samesite=None; secure`;
+			document.cookie = `token=${data.token}; expires=${new Date(Date.now() + 60 * 60 * 1000).toUTCString()}; path=/; samesite=None; secure`;
 			router.push("/");
 		} catch (err) {
 			console.error("Erro inesperado:", err);
