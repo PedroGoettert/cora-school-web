@@ -55,14 +55,28 @@ export default function Register() {
 		},
 	});
 
-	async function handleRegister(data: RegisterSchema) {
+	async function handleRegister(dataForm: RegisterSchema) {
+		console.log(dataForm);
+		const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				name: dataForm.name,
+				password: dataForm.password,
+				email: dataForm.email,
+			}),
+		});
+
+		if (!response.ok) {
+			const data = await response.json();
+			console.log(data);
+			return;
+		}
+
+		const data = await response.text();
 		console.log(data);
-
-		await new Promise((resolve) => setTimeout(resolve, 1000));
-		console.log("Cadastro enviado");
-
-		document.cookie = "token=testeregistro";
-		router.push("/");
 	}
 
 	return (

@@ -41,13 +41,33 @@ export default function Login() {
 	});
 
 	async function handleLogin({ password, username }: LoginSchema) {
-		console.log({ password, username });
+		try {
+			const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
+				method: "POST",
+				credentials: "include",
+				headers: {
+					"Content-type": "application/json",
+				},
+				body: JSON.stringify({
+					password,
+					email: username,
+				}),
+			});
 
-		await new Promise((resolve) => setTimeout(resolve, 1000));
-		console.log("Dados enviado");
+			if (!response.ok) {
+				const error = await response.json();
+				console.error("Erro de login:", error.message);
+				alert("Login inválido. Verifique seu usuário e senha.");
+				return;
+			}
 
-		document.cookie = "token=testeteste";
-		router.push("/");
+			const data = await response.json();
+			document.cookie = `token=${data.token}; expires=${new Date(Date.now() + 60 * 1000).toUTCString()}; path=/; samesite=None; secure`;
+			router.push("/");
+		} catch (err) {
+			console.error("Erro inesperado:", err);
+			alert("Erro inesperado. Tente novamente mais tarde.");
+		}
 	}
 
 	return (
