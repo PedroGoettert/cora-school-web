@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "Valentia",
+	title: "Cora",
 	description: "Controle de turmas e alunos",
 };
 

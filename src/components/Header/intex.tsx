@@ -22,7 +22,7 @@ export function Header() {
 				<Link href="/" className="flex items-center gap-2">
 					<School className="h-6 w-6 text-blue-600" />
 					<span className="text-xl font-bold tracking-tight text-zinc-800">
-						Valentia
+						Cora
 					</span>
 				</Link>
 
